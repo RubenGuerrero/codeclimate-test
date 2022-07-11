@@ -1,4 +1,4 @@
-name: Deploy to AWS production bucket
+name: CI
 on:
   push:
     branches:
@@ -22,4 +22,4 @@ jobs:
       - name: Publish Coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CODECLIMATE}}
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
