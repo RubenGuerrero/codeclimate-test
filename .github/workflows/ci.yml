@@ -1,0 +1,25 @@
+name: Deploy to AWS production bucket
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install
+        run: |
+          yarn install
+      - name: Run tests and coverage reports
+        run: |
+          yarn run test:ci
+      - name: Publish Coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CODECLIMATE}}
